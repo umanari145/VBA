@@ -9,5 +9,8 @@
 - makeSQL
     ExcelのテンプレートからSQLを一気に作成する。<br>
 
+- eachMakeSQL
+    Excel出力のサブ関数(テーブル単位のSQLの作成)<br>
+
 - util
     汎用的なモジュールなど。サンプルシート参照。flgでチェック(1)をつけたものを処理
