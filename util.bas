@@ -13,24 +13,31 @@ Public Sub checkFlg()
          startX = startX + 1
     Loop
 End Sub
-Public Function concatArr(ByVal pkCollection As collection, ByVal delimter As String) As String
+
+Public Function concatArr(ByVal pkCollection As Collection, ByVal delimter As String) As String
     Dim pkCode As String
     Dim comma As String
     Dim collectionCnt As Integer
     
     collectionCnt = 0
     For Each eachCollection In pkCollection
-        collectionCount = collectionCount + i
+        collectionCount = collectionCount + 1
         If collectionCount < pkCollection.Count Then
-            comma = delimiter
+            comma = delimter
         Else
             comma = ""
         End If
         
-        pkCode = pkCode + eachCollection + comma
+        If IsNumeric(eachCollection) = True Then
+            pkCode = pkCode + Str(eachCollection) + comma
+        Else
+            pkCode = pkCode + eachCollection + comma
+        End If
+        
         
     Next eachCollection
     
     concatArr = pkCode
     
 End Function
+
