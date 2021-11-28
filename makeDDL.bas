@@ -1,6 +1,5 @@
 Attribute VB_Name = "Module1"
 Sub makeDDL()
-Attribute makeDDL.VB_ProcData.VB_Invoke_Func = " �n14"
 '
 ' Macro1 Macro
 '
@@ -29,7 +28,7 @@ Private Sub eachSheetSQL(ByVal sheetName As String, path As String)
     Dim i, j, k As Integer
     Dim indexY As Integer
     Dim sql, indexNo, tmp, tmp2 As String
-    Dim pkCollection As New collection
+    Dim pkCollection As New Collection
     Dim pkStr, pkCode, pkComma, pkCodeLine As String
 
     pkCode = ""
@@ -41,6 +40,8 @@ Private Sub eachSheetSQL(ByVal sheetName As String, path As String)
     indexX = 4
     indexY = 1
      '   do column loop
+     
+      
     Do While Cells(indexX, indexY) <> ""
         indexNo = Cells(indexX, indexY).Value
         
@@ -51,7 +52,7 @@ Private Sub eachSheetSQL(ByVal sheetName As String, path As String)
         For j = 3 To 5
             tmp = Cells(indexX, j).Value
             If j = 5 Then
-                If tmp = "Yes�iPK�j" Then
+                If tmp = "Yes（PK）" Then
                     tmp2 = " NOT NULL ," & vbCrLf
                     pkCollection.Add Cells(indexX, 3)
                 ElseIf tmp = "Yes" Then
