@@ -7,13 +7,12 @@ Dim tableName, path As String
 Dim startX, startY As Integer
 
 'clear SQL file
-fileName = ""
-path = "/Users/matsumotonorio/Desktop/sampleDDL.sql"
+Worksheets("tableList").Select
+path = Cells(3, 5).Value
 Open path For Output As #1
     Print #1,
 Close #1
 
-Worksheets("tableList").Select
 startX = 2
 startY = 1
 tableNameY = 2
@@ -80,3 +79,4 @@ Private Sub eachSheetSQL(ByVal sheetName As String, path As String)
     Close #1
     
 End Sub
+
