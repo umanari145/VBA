@@ -7,7 +7,10 @@
     テーブルが複数あることを前提にし、テーブル一覧でチェックをつけたもののDDLを自動生成
 
 - makeSQL
-    ExcelのテンプレートからSQLを一気に作成する。<br>
+    Excelのテンプレートからinsertを作成する。<br>
+
+- updateSQL
+    Excelのテンプレートからupdateを作成する。<br>
 
 - eachMakeSQL
     Excel出力のサブ関数(テーブル単位のSQLの作成)<br>

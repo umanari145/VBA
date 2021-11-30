@@ -13,7 +13,6 @@ Public Sub checkFlg()
          startX = startX + 1
     Loop
 End Sub
-
 Public Function concatArr(ByVal pkCollection As Collection, ByVal delimter As String) As String
     Dim pkCode As String
     Dim comma As String
@@ -40,4 +39,19 @@ Public Function concatArr(ByVal pkCollection As Collection, ByVal delimter As St
     concatArr = pkCode
     
 End Function
-
+Public Function inArray(ByVal objCol As Collection, ByVal item As String) As Boolean
+     
+    isExist = False
+    
+    If objCol.Count > 0 Then
+        
+        For Each eachItem In objCol
+            If eachItem = item Then
+                isExist = True
+            End If
+        Next
+    
+    End If
+    
+    inArray = isExist
+End Function
