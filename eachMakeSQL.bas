@@ -1,15 +1,14 @@
-Attribute VB_Name = "Module4"
-Public Function eachMakeSQL(ByVal sheetName As String) As String
+Public Sub eachMakeSQL(ByVal sheetName As String, ByVal path As String, ByVal lot As Integer)
     Dim dataX, dataY, limitCount As Integer
-    Dim sql, tmp, tmp2, tmp3, tmpVal As String
+    Dim SQL, tmp, tmp2, tmp3, tmpVal As String
     Dim headCollection As New Collection
     Dim dataCollection As New Collection
     Dim allDataCollection As New Collection
     Dim headSQL, dataSQL As String
-
+    
     tmp = ""
     Worksheets(sheetName).Select
-    sql = "truncate table " + sheetName + ";" & vbCrLf
+    SQL = "truncate table " + sheetName + ";" & vbCrLf
     
      '   do column loop
     
@@ -22,9 +21,10 @@ Public Function eachMakeSQL(ByVal sheetName As String) As String
         headX = headX + 1
     Loop
             
-    For dataY = 2 To 999
+    For dataY = 2 To 99999
         'data
         limitCount = headCollection.Count
+        'initialize
         Set dataCollection = New Collection
         isData = False
         For dataX = 1 To limitCount
@@ -42,14 +42,27 @@ Public Function eachMakeSQL(ByVal sheetName As String) As String
         tmp = concatArr(dataCollection, ",")
         tmp2 = "(" + tmp + ")"
         allDataCollection.Add tmp2
-        y = y + 1
+        
+        ' save for memory saving
+        If (dataY - 1) Mod lot = 0 Then
+            Call saveOnePeriodSQL(headCollection, allDataCollection, path)
+            Set allDataCollection = New Collection
+        End If
     Next
+    
+    Call saveOnePeriodSQL(headCollection, allDataCollection, path)
+    
+End Sub
+Public Sub saveOnePeriodSQL(ByVal headCollection As Collection, ByVal allDataCollection As Collection, ByVal path As String)
+    Dim lastSQL As String
     
     headSQL = concatArr(headCollection, ",")
     dataSQL = concatArr(allDataCollection, ",")
     
-    tmp3 = "INSERT INTO " + sheetName + " (" + headSQL + ")" + " VALUES " + dataSQL
+    lastSQL = "INSERT INTO " + sheetName + " (" + headSQL + ")" + " VALUES " + dataSQL
+        
+    Open path For Append As #1
+        Print #1, lastSQL
+    Close #1
     
-    eachMakeSQL = sql + tmp3
-    
-End Function
+End Sub
