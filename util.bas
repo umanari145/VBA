@@ -1,4 +1,3 @@
-Attribute VB_Name = "Module2"
 Public Sub checkFlg()
      
     Dim i, startY As Integer
@@ -54,4 +53,20 @@ Public Function inArray(ByVal objCol As Collection, ByVal item As String) As Boo
     End If
     
     inArray = isExist
+End Function
+Public Function countLineNum(ByVal y As Integer, ByVal rowNum As Integer) As Integer
+
+    isExist = True
+    Do While isExist = True
+        isExist = False
+        For x = 1 To rowNum
+            If Cells(y, x).Value <> "" Then
+                isExist = True
+            End If
+        Next
+        y = y + 1
+    Loop
+    
+    countLineNum = y - 2
+    
 End Function

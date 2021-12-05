@@ -8,6 +8,10 @@ Dim sqlCollection As New Collection
 Dim path, tmp, tableName As String
 
 path = Cells(2, 7).Value
+Open path For Output As #1
+    Print #1,
+Close #1
+
 tableName = Cells(4, 8).Value
 'tableName = ActiveSheet.Name
 x = 1
@@ -34,7 +38,10 @@ Loop
 x = 1
 'data
 totalNums = headCollection.Count + updateKeyNumCollection.Count
-For dataNum = 2 To 7
+lineNum = countLineNum(2, totalNums)
+
+
+For dataNum = 2 To lineNum
     Set updateDataCollection = New Collection
     Set updateHeadCollection = New Collection
     For x = 1 To totalNums
@@ -43,13 +50,14 @@ For dataNum = 2 To 7
             If inArray(updateKeyNumCollection, x) = True Then
                 'where
                 updateHeadCollection.Add tmp
+             Else
                  'data
                 updateDataCollection.Add tmp
             End If
         End If
     Next
 
-    whereSQL = concatArr(updateHeadCollection, "and")
+    whereSQL = concatArr(updateHeadCollection, " and ")
     dataSQL = concatArr(updateDataCollection, ",")
     eachSQL = "update " + tableName + " set " + dataSQL + " where " + whereSQL
     sqlCollection.Add eachSQL
